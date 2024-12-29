@@ -15,7 +15,7 @@ export default function Login() {
         borderRadius: 10,
       }}
     >
-      <Text style={{ fontSize: 25, marginBottom: 20, fontWeight: "bold", textAlign: "center" }}>
+      <Text style={{ fontSize: 25, marginBottom: 20, fontWeight: "bold", marginLeft: 3 }}>
         Login To Your Account
       </Text>
       <TextInput
