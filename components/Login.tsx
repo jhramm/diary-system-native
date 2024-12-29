@@ -15,7 +15,7 @@ export default function Login() {
         borderRadius: 10,
       }}
     >
-      <Text style={{ fontSize: 25, marginBottom: 20 }}>
+      <Text style={{ fontSize: 25, marginBottom: 20, fontWeight: "bold", textAlign: "center" }}>
         Login To Your Account
       </Text>
       <TextInput
@@ -42,7 +42,7 @@ export default function Login() {
         placeholder="Password"
         placeholderTextColor={"gray"}
       />
-      <Text style={{ marginBottom: -70, fontWeight: "bold" }}>
+      <Text style={{ marginBottom: -70, fontWeight: "bold", marginLeft: 12}}>
         Choose an account type:{" "}
       </Text>
       <Picker
