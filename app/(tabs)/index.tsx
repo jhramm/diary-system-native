@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (
-     <SafeAreaView>
+     <SafeAreaView style={{backgroundColor: "#29dbba"}}>
       <Header title="Instructor Diary Services"/>
       <Login />
       <Footer />
