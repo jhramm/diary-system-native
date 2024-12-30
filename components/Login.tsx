@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import { Text, TextInput, StyleSheet } from "react-native";
+import { Text, TextInput, StyleSheet, Pressable } from "react-native";
 import { View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { LinearGradient } from "expo-linear-gradient";
+import { loginUser } from "@/services/POST";
 
 export default function Login() {
   const [selectedValue, setSelectedValue] = useState("client");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const userLogin = async () => {
+    const response = await loginUser(userName, password, selectedValue);
+    console.log(response);
+  }
 
   return (
     <LinearGradient
@@ -17,11 +25,13 @@ export default function Login() {
         style={styles.input}
         placeholder="User Name"
         placeholderTextColor={"#12705f"}
+        onChangeText={(text)=>setUserName(text)}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
         placeholderTextColor={"#12705f"}
+        onChangeText={(text)=>setPassword(text)}
       />
       <Text style={styles.accountTypeText}>Choose an account type:</Text>
       <Picker
@@ -37,6 +47,13 @@ export default function Login() {
         <Picker.Item label="Operator" value="operator" color="black" />
         <Picker.Item label="Pupil" value="pupil" color="black" />
       </Picker>
+
+      <View style={{height: 40}}></View>
+      <Pressable onPress={userLogin}>
+        <View style={{ backgroundColor: "#12705f", borderRadius: 10, padding: 10}}>
+          <Text style={{textAlign:"center", color:"white", fontSize: 17}}>Login</Text>
+        </View>
+      </Pressable>
     </LinearGradient>
   );
 }
