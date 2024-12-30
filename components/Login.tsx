@@ -9,9 +9,7 @@ export default function Login() {
 
   return (
     <LinearGradient
-      // Gradient colors
       colors={["#12705f", "#29dbba"]}
-      // Style for the gradient container
       style={styles.container}
     >
       <Text style={styles.title}>Login To Your Account</Text>
@@ -77,6 +75,6 @@ const styles = StyleSheet.create({
     marginBottom: -70,
     fontWeight: "bold",
     marginLeft: 12,
-    color: "white"
+    color: "white",
   },
 });
