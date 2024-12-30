@@ -6,8 +6,10 @@ export const loginUser = async (
   password: string,
   accountType: string
 ) => {
+    console.log({userName, password, accountType});
+    
   const response = await axios
-    .post(`${api.uri}/login/${accountType}`, {
+    .post(`${api.uri}/auth/login/${accountType}`, {
       username: userName,
       password: password,
     })
