@@ -1,60 +1,92 @@
 import React, { useState } from "react";
-import { Text, TextInput, StyleSheet, Pressable } from "react-native";
+import {
+  Text,
+  TextInput,
+  StyleSheet,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import { View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { LinearGradient } from "expo-linear-gradient";
 import { loginUser } from "@/services/POST";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Login() {
   const [selectedValue, setSelectedValue] = useState("client");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const navigation = useNavigation();
 
   const userLogin = async () => {
     const response = await loginUser(userName, password, selectedValue);
     console.log(response);
-  }
+
+    // if (response.success) {
+    //   if (
+    //     selectedValue === "client" ||
+    //     selectedValue === "instructor" ||
+    //     selectedValue === "operator"
+    //   ) {
+    //     navigation.navigate("Dashboard");
+    //   } else if (selectedValue === "pupil") {
+    //     navigation.navigate("PupilDashboard");
+    //   } else {
+    //     console.log("Logged in with account type:", selectedValue);
+    //   }
+    // } else {
+    //   console.error("Login failed:", response.message);
+    // }
+
+  };
 
   return (
-    <LinearGradient
-      colors={["#12705f", "#29dbba"]}
-      style={styles.container}
-    >
-      <Text style={styles.title}>Login To Your Account</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="User Name"
-        placeholderTextColor={"#12705f"}
-        onChangeText={(text)=>setUserName(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor={"#12705f"}
-        onChangeText={(text)=>setPassword(text)}
-      />
-      <Text style={styles.accountTypeText}>Choose an account type:</Text>
-      <Picker
-        selectionColor={"gray"}
-        selectedValue={selectedValue}
-        onValueChange={(item) => setSelectedValue(item)}
-        style={{ color: "black" }}
-        dropdownIconColor={"#000"}
-        mode="dropdown"
-      >
-        <Picker.Item label="Client" value="client" color="black" />
-        <Picker.Item label="Instructor" value="instructor" color="black" />
-        <Picker.Item label="Operator" value="operator" color="black" />
-        <Picker.Item label="Pupil" value="pupil" color="black" />
-      </Picker>
+    <ScrollView>
+      <LinearGradient colors={["#12705f", "#29dbba"]} style={styles.container}>
+        <Text style={styles.title}>Login To Your Account</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="User Name"
+          placeholderTextColor={"#12705f"}
+          onChangeText={(text) => setUserName(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor={"#12705f"}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <Text style={styles.accountTypeText}>Choose an account type:</Text>
+        <Picker
+          selectionColor={"gray"}
+          selectedValue={selectedValue}
+          onValueChange={(item) => setSelectedValue(item)}
+          style={{ color: "black" }}
+          dropdownIconColor={"#000"}
+          mode="dropdown"
+        >
+          <Picker.Item label="Client" value="client" color="black" />
+          <Picker.Item label="Instructor" value="instructor" color="black" />
+          <Picker.Item label="Operator" value="operator" color="black" />
+          <Picker.Item label="Pupil" value="pupil" color="black" />
+        </Picker>
 
-      <View style={{height: 40}}></View>
-      <Pressable onPress={userLogin}>
-        <View style={{ backgroundColor: "#12705f", borderRadius: 10, padding: 10}}>
-          <Text style={{textAlign:"center", color:"white", fontSize: 17}}>Login</Text>
-        </View>
-      </Pressable>
-    </LinearGradient>
+        <View style={{ height: 40 }}></View>
+        <Pressable onPress={userLogin}>
+          <View
+            style={{
+              backgroundColor: "#12705f",
+              borderRadius: 10,
+              padding: 10,
+            }}
+          >
+            <Text style={{ textAlign: "center", color: "white", fontSize: 17 }}>
+              Login
+            </Text>
+          </View>
+        </Pressable>
+      </LinearGradient>
+    </ScrollView>
   );
 }
 
@@ -89,7 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   accountTypeText: {
-    marginBottom: -70,
+    marginBottom: -55,
     fontWeight: "bold",
     marginLeft: 12,
     color: "white",

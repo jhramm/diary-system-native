@@ -7,19 +7,27 @@ export const loginUser = async (
   accountType: string
 ) => {
     console.log({userName, password, accountType});
-    
-  const response = await axios
-    .post(`${api.uri}/auth/login/${accountType}`, {
-      username: userName,
-      password: password,
-    })
-    .then((res) => {
-      return res;
-    })
-    .catch((e) => {
-      console.log(e);
-      return e;
-    });
+    try {
+      const response = await fetch(`${api.uri}/auth/login/${accountType}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userName: userName, password }),
+      });
 
-  return response;
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error:", errorData);
+        return errorData;
+      }
+
+      const data = await response.json();
+      return data;;
+    
+    } catch (error) {
+      console.error("Network Error:", error);
+      return error;
+    }
 };
